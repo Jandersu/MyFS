@@ -10,4 +10,3 @@ myfs: $(FILES)
 
 clean:
 	rm myfs
-
