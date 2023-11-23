@@ -1,11 +1,14 @@
 # Compilador
-CC = gcc
+CC=gcc
 
-# Arquivos
-FILES = myfs.c
+# arquivos
+FILES=myfs.c
+
+# Flags de compilação
+CFLAGS = -D_FILE_OFFSET_BITS=64
 
 myfs: $(FILES) 
-	$(CC) $(FILES) -o myfs 'pkg-config fuse --cflags --libs'
+	$(CC) $(CFLAGS) $(FILES) -o myfs `pkg-config fuse --cflags --libs`
 	echo 'montando sistema de arquivo: ./myfs -f [mount point]'
 
 clean:
