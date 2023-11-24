@@ -34,14 +34,6 @@ static struct stat regular_file = {.st_mode = S_IFREG | 00400};
 
 int my_getattr (const char *path, struct stat *s){
 
-	/*if(!strcmp(path, "/")){
-		s->st_mode = S_IFDIR | 00400;
-	}
-	if(!strcmp(path, "/my_file")){
-		s->st_mode = regular_file.st_mode;
-		s->st_size = strlen("Arquivo\n");
-	}*/
-	
 	printf( "[getattr] Called\n");
 	printf("Attributes of %s requested\n", path);
 	
@@ -73,17 +65,12 @@ int my_opendir (const char *, struct fuse_file_info *fInfo){
 int my_readdir (const char *path, void *buffer, fuse_fill_dir_t filler, off_t offset,
 			struct fuse_file_info *fInfo){
 	
-	/*static struct stat regular_file = {.st_mode = S_IFREG | 00400};
-    	if(!strcmp(path, "/")){
-		filler(buf, "my_file", &regular_file, 0);
-	}*/
-	
 	printf( "--> Getting The List of Files of %s\n", path );
 	
 	filler( buffer, ".", NULL, 0 ); // Current Directory
 	filler( buffer, "..", NULL, 0 ); // Parent Directory
 	
-	if ( strcmp( path, "/" ) == 0 ) // If the user is trying to show the files/directories of the 			root directory show the following
+	if ( strcmp( path, "/" ) == 0 ) // If the user is trying to show the files/directories of the root directory show the following
 	{
 		filler( buffer, "file54", NULL, 0 );
 		filler( buffer, "file349", NULL, 0 );
